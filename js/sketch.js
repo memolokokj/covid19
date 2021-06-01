@@ -11,8 +11,6 @@ const options = {
   lat: 11,
   lng: 11,
   zoom: 8.5,
-  studio: true,
-  style: 'mapbox://styles/mapbox/traffic-night-v2',
 };
 
 

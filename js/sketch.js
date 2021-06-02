@@ -8,17 +8,20 @@ let trainMap;
 
 
 const options = {
-  lat: 11,
-  lng: 11,
-  zoom: 8.5,
+  lat: 0,
+  lng: 0,
+  zoom: 4,
+  style: 'mapbox.satellite',
+  pitch: 50,
+
 };
 
 
 function preload() {
-	const url = "https://api.apify.com/v2/key-value-stores/vpfkeiYLXPIDIea2T/records/LATEST"
+	/*const url = "https://api.apify.com/v2/key-value-stores/vpfkeiYLXPIDIea2T/records/LATEST"
 	const url2 = "assets/JSONS/states.json"
 	data = loadJSON(url);
-	polygonsData = loadJSON(url2);
+	polygonsData = loadJSON(url2);*/
 }
 
 function setup() {
@@ -33,7 +36,7 @@ function setup() {
 function draw() {
 	clear();
 
-	Object.entries(polygonsData.features).map( (s) => {
+	/*Object.entries(polygonsData.features).map( (s) => {
 		let [features, dato2] = s;
 		var array = [];
 		for(var i = 0; i <dato2.geometry.coordinates[0][0].length; i++){
@@ -52,7 +55,11 @@ function draw() {
       ellipse(pos.x, pos.y, 100, 100);
 			endShape();
 		}
-	}
+	}*/
+	console.log(trainMap);
+	let nigeria = trainMap.latLngToPixel(11.396396, 5.076543);
+	
+
 
 	/*print(data);
 	let count = 20;

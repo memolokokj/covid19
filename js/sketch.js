@@ -1,4 +1,4 @@
-const key = 'pk.eyJ1GV9Jm2u7rmsCe65wKzPTw5jtS38n2tVEGiQ2emhyMWU4NTJvbzFuaXcyajNjeCJ9.G6rwyJrwlzbVxwQPdFiLvw';
+const key = 'pk.eyJ1IjoiYXZyZW1pZ3VlIiwiYSI6ImNrN2UyaGdyZzA0NmozZ250bGNyMHMyaXYifQ.mxEBxZOBHLkzJGPJllpVEg';
 
 let canvas;
 let polygons = [];
@@ -11,11 +11,9 @@ const options = {
   lat: 0,
   lng: 0,
   zoom: 4,
-  style: 'mapbox.satellite',
-  pitch: 50,
-
+  style: 'mapbox://styles/mapbox/traffic-night-v2',
+  //pitch: 50,
 };
-
 
 function preload() {
 	/*const url = "https://api.apify.com/v2/key-value-stores/vpfkeiYLXPIDIea2T/records/LATEST"

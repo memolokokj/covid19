@@ -16,10 +16,10 @@ const options = {
 };
 
 function preload() {
-	/*const url = "https://api.apify.com/v2/key-value-stores/vpfkeiYLXPIDIea2T/records/LATEST"
+	const url = "https://api.apify.com/v2/key-value-stores/vpfkeiYLXPIDIea2T/records/LATEST"
 	const url2 = "assets/JSONS/states.json"
 	data = loadJSON(url);
-	polygonsData = loadJSON(url2);*/
+	polygonsData = loadJSON(url2);
 }
 
 function setup() {
@@ -34,7 +34,7 @@ function setup() {
 function draw() {
 	clear();
 
-	/*Object.entries(polygonsData.features).map( (s) => {
+	Object.entries(polygonsData.features).map( (s) => {
 		let [features, dato2] = s;
 		var array = [];
 		for(var i = 0; i <dato2.geometry.coordinates[0][0].length; i++){
@@ -42,7 +42,7 @@ function draw() {
 		}
 		polygons.push(array);
 	});
-
+/*
 	//print(polygons);
 
 	for(var i = 0; i <polygons.length; i++){
@@ -54,9 +54,10 @@ function draw() {
 			endShape();
 		}
 	}*/
-	console.log(trainMap);
+	console.log(polygons);
+
 	let nigeria = trainMap.latLngToPixel(11.396396, 5.076543);
-	
+	console.log(nigeria);
 
 
 	/*print(data);

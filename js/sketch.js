@@ -22,7 +22,6 @@ function setup() {
 }
 
 function draw() {
-	background("black");
 	Object.entries(data.State).map( (s) => {
 		let [estado, datos] = s;
 		infectados[estado] = datos.infected;
@@ -49,63 +48,110 @@ function state(){
 			'data': 'assets/jsons/states.json'
 		});
 		
-		map.addLayer({
-			'id': 'state-fills',
-			'type': 'fill',
-			'source': 'states',
-			'layout': {},
-			'paint': {
-				'fill-color': '#E52C04',
-				'fill-opacity': [
-					'case',
-					['boolean', ['feature-state', 'hover'], false], 1, 0.5]
-			}
-		});
-		 
-		map.addLayer({
-			'id': 'state-borders',
-			'type': 'line',
-			'source': 'states',
-			'layout': {},
-			'paint': {
-				'line-color': '#E52C04',
-				'line-width': 2
-			}
-		});
-		
+		for(i in infectados){
 
-		map.on('mousemove', 'state-fills', function (e) {
-			if (e.features.length > 0) {
+			var trueId = 0;
+			var color = "#000000"
+			
+			switch(i){
+				case "Queretaro":trueId=0;break;
+				case "Ciudad de Mexico":trueId=1;break;
+				case "Colima":trueId=2;break;
+				case "Morelos":trueId=3;break;
+				case "Aguascalientes":trueId=4;break;
+				case "Chihuahua":trueId=5;break;
+				case "Guanajuato":trueId=6;break;
+				case "Coahuila":trueId=7;break;
+				case "Nuevo Leon":trueId=8;break;
+				case "Tamaulipas":trueId=9;break;
+				case "Yucatan":trueId=10;break;
+				case "Sinaloa":trueId=11;break;
+				case "Quintana Roo":trueId=12;break;
+				case "Durango":trueId=13;break;
+				case "Hidalgo":trueId=14;break;
+				case "Zacatecas":trueId=15;break;
+				case "Campeche":trueId=16;break;
+				case "San Luis Potosi":trueId=17;break;
+				case "Jalisco":trueId=18;break;
+				case "Veracruz":trueId=19;break;
+				case "Puebla":trueId=20;break;
+				case "Guerrero":trueId=21;break;
+				case "Michoacan":trueId=22;break;
+				case "Estado de Mexico":trueId=23;break;
+				case "Tlaxcala":trueId=24;break;
+				case "Oaxaca":trueId=25;break;
+				case "Tabasco":trueId=26;break;
+				case "Chiapas":trueId=27;break;
+				case "Sonora":trueId=28;break;
+				case "Baja California":trueId=29;break;
+				case "Nayarit":trueId=30;break;
+				case "Baja California Sur":trueId=31;break;
+			}
+
+			if(infectados[i] <= 10000) color = "#05F72F";
+			else if(infectados[i] > 15000 && infectados[i] <20000) color = "#E0F903";
+			else color = "#F60B07";
+		
+			map.addLayer({
+				'id': 'state-fills'+trueId,
+				'type': 'fill',
+				'source': 'states',
+				'layout': {},
+				'paint': {
+					'fill-color': color,
+					'fill-opacity': [
+						'case',
+						['boolean', ['feature-state', 'hover'], false], 1, 0.5]
+				},
+				'filter': ['==', '$id', trueId]
+			});
+			 
+			map.addLayer({
+				'id': 'state-borders'+trueId,
+				'type': 'line',
+				'source': 'states',
+				'layout': {},
+				'paint': {
+					'line-color': "#000000",
+					'line-width': 1
+				},
+				'filter': ['==', '$id', trueId]
+			});
+
+			map.on('mousemove', 'state-fills'+trueId, function (e) {
+				if (e.features.length > 0) {
+					if (hoveredStateId !== null) {
+						map.setFeatureState(
+							{ source: 'states', id: hoveredStateId },
+							{ hover: false }
+						);
+					}
+					hoveredStateId = e.features[0].id;
+					//console.log(e.features[0]);
+
+			    // Show the popup at the coordinates with some data
+			    popup.setLngLat(e.lngLat.wrap())
+			      .setHTML(checkEmpty("<p style='text-align: center;'>"+e.features[0].properties.admin_name+"<br> Infectados: "+infectados[e.features[0].properties.admin_name]+"</p>"))
+			      .addTo(map);
+
+					map.setFeatureState(
+						{ source: 'states', id: hoveredStateId },
+						{ hover: true },
+					);
+				}
+			});
+			 
+			map.on('mouseleave', 'state-fills'+trueId, function () {
 				if (hoveredStateId !== null) {
+		    	popup.remove();
 					map.setFeatureState(
 						{ source: 'states', id: hoveredStateId },
 						{ hover: false }
 					);
 				}
-				hoveredStateId = e.features[0].id;
-				//console.log(e.features[0]);
+				hoveredStateId = null;
+			});
 
-		    // Show the popup at the coordinates with some data
-		    popup.setLngLat(e.lngLat.wrap())
-		      .setHTML(checkEmpty("<p style='text-align: center;'>"+e.features[0].properties.admin_name+"<br> Infectados: "+infectados[e.features[0].properties.admin_name]+"</p>"))
-		      .addTo(map);
-
-				map.setFeatureState(
-					{ source: 'states', id: hoveredStateId },
-					{ hover: true },
-				);
-			}
-		});
-		 
-		map.on('mouseleave', 'state-fills', function () {
-			if (hoveredStateId !== null) {
-	    	popup.remove();
-				map.setFeatureState(
-					{ source: 'states', id: hoveredStateId },
-					{ hover: false }
-				);
-			}
-			hoveredStateId = null;
-		});
+		}
 	});
 }

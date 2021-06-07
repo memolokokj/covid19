@@ -13,8 +13,8 @@ function setup() {
 	map = new mapboxgl.Map({
 		container: "map",
 		style: 'mapbox://styles/mapbox/streets-v11',
-		center: [-100.486052, 37.830348],
-		zoom: 2
+		center: [-102.552784, 23.634501],
+		zoom: 3.4
 	});
 
 	state();
@@ -26,7 +26,6 @@ function draw() {
 		let [estado, datos] = s;
 		infectados[estado] = datos.infected;
 	});
-	console.log(infectados); 
 }
 
 function state(){
@@ -88,9 +87,10 @@ function state(){
 				case "Baja California Sur":trueId=31;break;
 			}
 
-			if(infectados[i] <= 10000) color = "#05F72F";
-			else if(infectados[i] > 15000 && infectados[i] <20000) color = "#E0F903";
-			else color = "#F60B07";
+			if(infectados[i] <= 10000) color = "#1CFF00";
+			else if(infectados[i] > 10000 && infectados[i] <=20000) color = "#FCFF00";
+			else if(infectados[i] > 20000 && infectados[i] <=30000) color = "#FF7F00";
+			else color = "#FF1F00";
 		
 			map.addLayer({
 				'id': 'state-fills'+trueId,
@@ -101,7 +101,7 @@ function state(){
 					'fill-color': color,
 					'fill-opacity': [
 						'case',
-						['boolean', ['feature-state', 'hover'], false], 1, 0.5]
+						['boolean', ['feature-state', 'hover'], false], 1, 0.7]
 				},
 				'filter': ['==', '$id', trueId]
 			});

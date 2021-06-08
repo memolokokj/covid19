@@ -7,7 +7,7 @@ function preload() {
 }
 
 function setup() {
-	var canvas = createCanvas(windowWidth/2, windowHeight/2);
+	var canvas = createCanvas(0,0);
 
   mapboxgl.accessToken = 'pk.eyJ1IjoiYXZyZW1pZ3VlIiwiYSI6ImNrN2UyaGdyZzA0NmozZ250bGNyMHMyaXYifQ.mxEBxZOBHLkzJGPJllpVEg';
 	map = new mapboxgl.Map({

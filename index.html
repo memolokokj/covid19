@@ -113,103 +113,101 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
 	<script type="text/javascript">
 
-        var dataC;
-        var dataR;
-        var dataF;
+    var dataC;
+    var dataR;
+    var dataF;
 
-        var arrayDias = [];
-        var arrayConfirmados = [];
-        var arrayRecuperados = [];
-        var arrayfallecidos = [];
+    var arrayDias = [];
+    var arrayConfirmados = [];
+    var arrayRecuperados = [];
+    var arrayfallecidos = [];
 
-        const today = new Date();
+    const today = new Date();
 		const finalDate = new Date(today);
 		finalDate.setDate(today.getDate()-1);
 
- 		for (var i = 0; i < 5; i++) {
+ 		for (var i = 5; i > 0; i--) {
  			var m = (finalDate.getMonth() +1);
-          	var d = (finalDate.getDate());
-          	var y = finalDate.getFullYear().toString().substr(-2);
-          	var fecha = (m+"/"+d+"/"+y);
+    	var d = (finalDate.getDate());
+    	var y = finalDate.getFullYear().toString().substr(-2);
+    	var fecha = (m+"/"+d+"/"+y);
  			arrayDias.push(fecha);
  			finalDate.setDate(finalDate.getDate()-1)
  		}
 
  		axios.get('https://corona.lmao.ninja/v2/historical/Mexico?lastdays=30')
-        .then(function (response) {
-         	var dataGrafica = response.data;
-         	for (var i = 4; i >= 0; i--) {
-         		arrayConfirmados.push(dataGrafica.timeline.cases[arrayDias[i]]);
-         		arrayRecuperados.push(dataGrafica.timeline.recovered[arrayDias[i]]);
-         		arrayfallecidos.push(dataGrafica.timeline.deaths[arrayDias[i]]);
-         		//console.log(dataGrafica.timeline.cases[arrayDias[i]]);
-         	}
+      .then(function (response) {
+       	var dataGrafica = response.data;
+       	for (var i = 0; i <= 4; i++) {
+       		arrayConfirmados.push(dataGrafica.timeline.cases[arrayDias[i]]);
+       		arrayRecuperados.push(dataGrafica.timeline.recovered[arrayDias[i]]);
+       		arrayfallecidos.push(dataGrafica.timeline.deaths[arrayDias[i]]);
+       		//console.log(dataGrafica.timeline.cases[arrayDias[i]]);
+       	}
 
-      })
-        .catch(function (error) { 
-          console.log(error);
-      });
+       	dataC = arrayConfirmados;
+		    dataR = arrayRecuperados;
+		   	dataF = arrayfallecidos;
 
-        dataC = arrayConfirmados;
-        dataR = arrayRecuperados;
-       	dataF = arrayfallecidos;
-        
-        var ctx = document.getElementById('myChart').getContext('2d');
-        
-		var myChart = new Chart(ctx, {
-		    type: 'bar',
-		    data: {
-		        labels: arrayDias,
-		        datasets: [{
-		            label: 'Confirmados',
-		            data: dataC,
-		            backgroundColor: [
-		                'rgba(255, 99, 132, 0.9)',
-		            ],
-		            borderColor: [
-		                'rgba(255, 99, 132, 0.9)',
-		            ],
-		            borderWidth: 1
-		        },{
-		        	label: 'Recuperados',
-		            data: dataR,
-		            backgroundColor: [
-		                'rgba(75, 192, 192, 0.9)',
-		            ],
-		            borderColor: [
-		                'rgba(75, 192, 192, 0.9)',
-		            ],
-		            borderWidth: 1
-		        },{
-		        	label: 'Fallecidos',
-		            data: dataF,
-		            backgroundColor: [
-		                'rgba(201, 203, 207, 0.9)',
-		            ],
-		            borderColor: [
-		                'rgba(201, 203, 207, 0.9)',
-		            ],
-		            borderWidth: 1}],
-		    },
-		    options: {
-		        scales: {
-		            y: {
-		                beginAtZero: true
-		            }
-		        }
-		    }
-		});
+       	var ctx = document.getElementById('myChart').getContext('2d');   
+				var myChart = new Chart(ctx, {
+				    type: 'bar',
+				    data: {
+				        labels: arrayDias,
+				        datasets: [{
+				            label: 'Confirmados',
+				            data: dataC,
+				            backgroundColor: [
+				                'rgba(255, 99, 132, 0.9)',
+				            ],
+				            borderColor: [
+				                'rgba(255, 99, 132, 0.9)',
+				            ],
+				            borderWidth: 1
+				        },{
+				        	label: 'Recuperados',
+				            data: dataR,
+				            backgroundColor: [
+				                'rgba(75, 192, 192, 0.9)',
+				            ],
+				            borderColor: [
+				                'rgba(75, 192, 192, 0.9)',
+				            ],
+				            borderWidth: 1
+				        },{
+				        	label: 'Fallecidos',
+				            data: dataF,
+				            backgroundColor: [
+				                'rgba(201, 203, 207, 0.9)',
+				            ],
+				            borderColor: [
+				                'rgba(201, 203, 207, 0.9)',
+				            ],
+				            borderWidth: 1}],
+				    },
+				    options: {
+				        scales: {
+				            y: {
+				                beginAtZero: true
+				            }
+				        }
+				    }
+					});
+  			})
+	      	.catch(function (error) { 
+	      		console.log(error);
+  			});
 
 		axios.get('https://corona.lmao.ninja/v2/countries/Mexico?yesterday&strict&query%20')
-        .then(function (response) { 
-          var data = response.data;
-          document.getElementById("confirmados").innerHTML = data.cases;
-          document.getElementById("moridos").innerHTML = data.deaths;
-          document.getElementById("recuperados").innerHTML = data.recovered;
-      })
-        .catch(function (error) { 
-          console.log(error);
-      });
+      .then(function (response) { 
+        var data = response.data;
+        document.getElementById("confirmados").innerHTML = data.cases;
+        document.getElementById("moridos").innerHTML = data.deaths;
+        document.getElementById("recuperados").innerHTML = data.recovered;
+    })
+      .catch(function (error) { 
+        console.log(error);
+    });
 	</script>
 </body>
 </html>

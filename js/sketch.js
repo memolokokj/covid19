@@ -32,7 +32,6 @@ function state(){
 	var hoveredStateId = null;
 	 
 	map.on('load', function () {
-		// Create a popup, but don't add it to the map yet.
 	  var popup = new mapboxgl.Popup({
 	    closeButton: false,
 	    closeOnClick: false
@@ -129,7 +128,6 @@ function state(){
 					hoveredStateId = e.features[0].id;
 					//console.log(e.features[0]);
 
-			    // Show the popup at the coordinates with some data
 			    popup.setLngLat(e.lngLat.wrap())
 			      .setHTML(checkEmpty("<p style='text-align: center;'>"+e.features[0].properties.admin_name+"<br> Infectados: "+infectados[e.features[0].properties.admin_name]+"</p>"))
 			      .addTo(map);

@@ -29,6 +29,9 @@
 			margin:auto;
 		}
 		#map { float: left; width: 100%; height: 100%; }
+		.centesr{
+			margin-left: 10%;
+		}
 	</style>
 </head>
 <body>
@@ -47,19 +50,19 @@
 	<div class="row mx-auto mb-2" style="width: 80%">
 		<h1 class="mb-4">Casos Covid-19 Registrados</h1>
       	<div class="col-lg-4">
-        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="red"/></svg>
+        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="red"/><image x="5%" href="assets/img/confirmados.png" height="90%" width="90%"/></svg>
 
         	<h2 class="text-muted">Confirmados</h2>
         	<p class="card-text"><h1 id="confirmados" style="color: black"></h1></p>
       	</div>
       	<div class="col-lg-4">
-        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="green"/></svg>
+        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="green"/><image x="5%" y="10%" href="assets/img/recuperados.png" height="90%" width="90%"/></svg>
 
         	<h2 class="text-muted">Recuperados</h2>
         	<p class="card-text"><h1 id="recuperados" style="color: black"></h1></p>
       	</div>
       	<div class="col-lg-4">
-        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="dark"/></svg>
+        	<svg class="bd-placeholder-img rounded-circle" width="90" height="90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="dark"/><image x="5%" y="5%" href="assets/img/defunciones.png" height="90%" width="90%"/></svg>
 
         	<h2 class="text-muted">Defunciones</h2>
         	<p class="card-text" style="color: black"><h1 id="moridos" style="color: black"></h1></p>
@@ -69,9 +72,9 @@
    	<main style="width: 80%" class="mx-auto">
     	<div class="row row-cols-1 row-cols-md-2 mb-2 text-center">
       		<div class="col">
-        		<div class="card mb-4 rounded-3 shadow-sm">
+        		<div class="card mb-4 rounded-3 shadow-sm" style="height: 100%;">
           			<div class="card-header py-3" style="background-color: white; border: none">
-            			<h4 class="my-0" style="font-weight: bolder;font-size: 30px;color: black;">Mapa de Casos Confirmados</h4>
+            			<h4 class="my-0" style="font-weight: bolder;font-size: 30px;color: black;">Semáforo de Casos Confirmados</h4>
           			</div>
           			<div class="card-body" style="height: 70vh">
 						<div id="map"></div>
@@ -79,9 +82,9 @@
         		</div>
       		</div>
       		<div class="col">
-        		<div class="card mb-4 rounded-3 shadow-sm">
+        		<div class="card mb-4 rounded-3 shadow-sm" style="height: 100%;">
           			<div class="card-header py-3" style="background-color: white; border: none">
-            			<h4 class="my-0"style="font-weight: bolder;font-size: 30px;color: black;">Comparacion por Meses 2021</h4>
+            			<h4 class="my-0"style="font-weight: bolder;font-size: 30px;color: black;">Comparación por Meses 2021</h4>
           			</div>
           			<div class="card-body">
             			<canvas id="myChart" width="370" height="430"></canvas>
@@ -91,7 +94,7 @@
       	</div>
   	</main>
 
-  	 <div class="bg-dark text-secondary px-4 py-1 text-center mx-auto" style="width: 90%;border-radius: 10px">
+  	 <div class="bg-dark text-secondary px-4 mb-2 py-1 text-center mx-auto" style="width: 90%;border-radius: 10px">
     	<div class="py-2">
       		<h1 class="display-5 fw-bold text-white">Graficación y Multimedia</h1>
       		<div class="col-lg-6 mx-auto">

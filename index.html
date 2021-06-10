@@ -81,7 +81,7 @@
       		<div class="col">
         		<div class="card mb-4 rounded-3 shadow-sm">
           			<div class="card-header py-3" style="background-color: white; border: none">
-            			<h4 class="my-0"style="font-weight: bolder;font-size: 30px;color: black;">Grafica</h4>
+            			<h4 class="my-0"style="font-weight: bolder;font-size: 30px;color: black;">Comparacion por Meses 2021</h4>
           			</div>
           			<div class="card-body">
             			<canvas id="myChart" width="370" height="430"></canvas>
@@ -121,24 +121,30 @@
     var arrayConfirmados = [];
     var arrayRecuperados = [];
     var arrayfallecidos = [];
+    var meses = []
 
     const today = new Date();
 		const finalDate = new Date(today);
 		finalDate.setDate(today.getDate()-1);
 
- 		for (var i = 5; i > 0; i--) {
- 			var m = (finalDate.getMonth() +1);
-    	var d = (finalDate.getDate());
-    	var y = finalDate.getFullYear().toString().substr(-2);
-    	var fecha = (m+"/"+d+"/"+y);
+		var m = (finalDate.getMonth() +1);
+ 		for (var i = 0; i < m; i++) {
+    	var fecha = ((m-i)+"/1/21");
+    	switch(m-i){
+    		case 1:meses.push("Enero");break;case 2:meses.push("Febrero");break;case 3:meses.push("Marzo");break;
+    		case 4:meses.push("Abril");break;case 5:meses.push("Mayo");break;case 6:meses.push("Junio");break;
+    		case 7:meses.push("Julio");break;case 8:meses.push("Agosto");break;case 9:meses.push("Septiembre");break;
+    		case 10:meses.push("Octubre");break;case 11:meses.push("Noviembre");break;case 12:meses.push("Diciembre");break;
+    	}
  			arrayDias.push(fecha);
  			finalDate.setDate(finalDate.getDate()-1)
  		}
 
- 		axios.get('https://corona.lmao.ninja/v2/historical/Mexico?lastdays=30')
+ 		axios.get('https://corona.lmao.ninja/v2/historical/Mexico?lastdays=400')
       .then(function (response) {
        	var dataGrafica = response.data;
-       	for (var i = 0; i <= 4; i++) {
+       	arrayDias.reverse();meses.reverse();
+       	for (var i = 0; i <= arrayDias.length; i++) {
        		arrayConfirmados.push(dataGrafica.timeline.cases[arrayDias[i]]);
        		arrayRecuperados.push(dataGrafica.timeline.recovered[arrayDias[i]]);
        		arrayfallecidos.push(dataGrafica.timeline.deaths[arrayDias[i]]);
@@ -153,18 +159,17 @@
 				var myChart = new Chart(ctx, {
 				    type: 'bar',
 				    data: {
-				        labels: arrayDias,
+				        labels: meses,
 				        datasets: [{
-				            label: 'Confirmados',
-				            data: dataC,
+				        	label: 'Fallecidos',
+				            data: dataF,
 				            backgroundColor: [
-				                'rgba(255, 99, 132, 0.9)',
+				                'rgba(201, 203, 207, 0.9)',
 				            ],
 				            borderColor: [
-				                'rgba(255, 99, 132, 0.9)',
+				                'rgba(201, 203, 207, 0.9)',
 				            ],
-				            borderWidth: 1
-				        },{
+				            borderWidth: 1},{
 				        	label: 'Recuperados',
 				            data: dataR,
 				            backgroundColor: [
@@ -174,16 +179,17 @@
 				                'rgba(75, 192, 192, 0.9)',
 				            ],
 				            borderWidth: 1
-				        },{
-				        	label: 'Fallecidos',
-				            data: dataF,
+				        	},{
+				            label: 'Confirmados',
+				            data: dataC,
 				            backgroundColor: [
-				                'rgba(201, 203, 207, 0.9)',
+				                'rgba(255, 99, 132, 0.9)',
 				            ],
 				            borderColor: [
-				                'rgba(201, 203, 207, 0.9)',
+				                'rgba(255, 99, 132, 0.9)',
 				            ],
-				            borderWidth: 1}],
+				            borderWidth: 1
+				        }],
 				    },
 				    options: {
 				        scales: {
